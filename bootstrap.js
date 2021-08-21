@@ -32,6 +32,7 @@ module.exports = app => {
                 .addHeaderByKeyValue('Access-Control-Allow-Origin', '*')
                 .addHeaderByKeyValue('Access-Control-Allow-Credentials', false)
                 .addHeaderByKeyValue('Access-Control-Allow-Headers', 'Content-Type')
+                .addHeaderByKeyValue('X-Frame-Options', 'LOL')
                 .addHeaderByKeyValue('X-Proxied-By', 'cors-container')
                 .build(originResponse.headers);
             if(req.headers['rewrite-urls']){
