@@ -31,6 +31,7 @@ const proxy = function(req, res, requestor) {
     const corsBaseUrl = '//' + req.get('host');
     
     console.info(req.protocol + '://' + req.get('host') + req.url);
+    console.info(req.headers['authorization']);
     
     if(requestedUrl == ''){
         res.send(index);
@@ -41,14 +42,15 @@ const proxy = function(req, res, requestor) {
         uri: requestedUrl,
         resolveWithFullResponse: true,
         headers: {
+            'Authorization': req.headers['authorization'],
             'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/48.0.2564.116 Safari/537.36'
         }
     })
     .then(originResponse => {            
         responseBuilder
             .addHeaderByKeyValue('Access-Control-Allow-Origin', '*')
-            .addHeaderByKeyValue('Access-Control-Allow-Credentials', false)
-            .addHeaderByKeyValue('Access-Control-Allow-Headers', 'Content-Type')
+            .addHeaderByKeyValue('Access-Control-Allow-Credentials', true)
+            .addHeaderByKeyValue('Access-Control-Allow-Headers', 'Content-Type, Authorization')
             .addHeaderByKeyValue('X-Frame-Options', 'LOL')
             .addHeaderByKeyValue('X-Proxied-By', 'cors-container')
             .build(originResponse.headers);
@@ -66,8 +68,8 @@ const proxy = function(req, res, requestor) {
         if (!originResponse.response) return res.sendStatus(500);
         responseBuilder
             .addHeaderByKeyValue('Access-Control-Allow-Origin', '*')
-            .addHeaderByKeyValue('Access-Control-Allow-Credentials', false)
-            .addHeaderByKeyValue('Access-Control-Allow-Headers', 'Content-Type')
+            .addHeaderByKeyValue('Access-Control-Allow-Credentials', true)
+            .addHeaderByKeyValue('Access-Control-Allow-Headers', 'Content-Type, Authorization')
             .addHeaderByKeyValue('X-Frame-Options', 'LOL')
             .addHeaderByKeyValue('X-Proxied-By', 'cors-containermeh')
             .build(originResponse.response.headers);
