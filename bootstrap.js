@@ -51,6 +51,7 @@ const proxy = function(req, res, requestor) {
             .addHeaderByKeyValue('Access-Control-Allow-Origin', '*')
             .addHeaderByKeyValue('Access-Control-Allow-Credentials', true)
             .addHeaderByKeyValue('Access-Control-Allow-Headers', 'Content-Type, Authorization')
+            .addHeaderByKeyValue('Access-Control-Expose-Headers', 'link')
             .addHeaderByKeyValue('X-Frame-Options', 'LOL')
             .addHeaderByKeyValue('X-Proxied-By', 'cors-container')
             .build(originResponse.headers);
@@ -70,6 +71,7 @@ const proxy = function(req, res, requestor) {
             .addHeaderByKeyValue('Access-Control-Allow-Origin', '*')
             .addHeaderByKeyValue('Access-Control-Allow-Credentials', true)
             .addHeaderByKeyValue('Access-Control-Allow-Headers', 'Content-Type, Authorization')
+            .addHeaderByKeyValue('Access-Control-Expose-Headers', 'link')
             .addHeaderByKeyValue('X-Frame-Options', 'LOL')
             .addHeaderByKeyValue('X-Proxied-By', 'cors-containermeh')
             .build(originResponse.response.headers);
