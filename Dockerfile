@@ -1,4 +1,4 @@
-FROM node:10-stretch
+FROM amd64/node:18-alpine
 
 WORKDIR /usr/src/app
 
