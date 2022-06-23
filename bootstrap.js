@@ -7,9 +7,9 @@ const index = fs.readFileSync('index.html', 'utf8');
 const ResponseBuilder = require('./app/ResponseBuilder');
 
 module.exports = app => {
-    app.get('/https://mvla.instructure.com/*', proxyGet);
-    app.post('/https://mvla.instructure.com/*', proxyPost);
-    app.put('/https://mvla.instructure.com/*', proxyPut);
+    app.get('/https://*.instructure.com/*', proxyGet);
+    app.post('/https://*.instructure.com/*', proxyPost);
+    app.put('/https://*.instructure.com/*', proxyPut);
 };
 
 const proxyGet = function(req, res) {
@@ -43,7 +43,7 @@ const proxy = function(req, res, requestor) {
         resolveWithFullResponse: true,
         headers: {
             'Authorization': req.headers['authorization'],
-            'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/48.0.2564.116 Safari/537.36'
+            'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/15.5 Safari/605.1.15'
         }
     })
     .then(originResponse => {            
