@@ -7,9 +7,13 @@ const index = fs.readFileSync('index.html', 'utf8');
 const ResponseBuilder = require('./app/ResponseBuilder');
 
 module.exports = app => {
-    app.get('/https://*.instructure.com/*', proxyGet);
-    app.post('/https://*.instructure.com/*', proxyPost);
-    app.put('/https://*.instructure.com/*', proxyPut);
+    app.get('/https://*.*.com/*', proxyGet);
+    app.post('/https://*.*.com/*', proxyPost);
+    app.put('/https://*.*.com/*', proxyPut);
+
+    app.get('/https://*.*.edu/*', proxyGet);
+    app.post('/https://*.*.edu/*', proxyPost);
+    app.put('/https://*.*.edu/*', proxyPut);
 };
 
 const proxyGet = function(req, res) {
