@@ -10,22 +10,25 @@ module.exports = app => {
     app.get('/https://*.*.com/*', proxyGet);
     app.post('/https://*.*.com/*', proxyPost);
     app.put('/https://*.*.com/*', proxyPut);
+    app.delete('/https://*.*.com/*', proxyDelete);
 
     app.get('/https://*.*.edu/*', proxyGet);
     app.post('/https://*.*.edu/*', proxyPost);
     app.put('/https://*.*.edu/*', proxyPut);
+    app.delete('/https://*.*.com/*', proxyDelete);
 };
 
 const proxyGet = function(req, res) {
     proxy(req, res, request.get);
 }
-
 const proxyPost = function(req, res) {
     proxy(req, res, request.post);
 }
-
 const proxyPut = function(req, res) {
     proxy(req, res, request.put);
+}
+const proxyDelete = function(req, res) {
+    proxy(req, res, request.delete);
 }
 
 const proxy = function(req, res, requestor) {
@@ -57,7 +60,7 @@ const proxy = function(req, res, requestor) {
             .addHeaderByKeyValue('Access-Control-Allow-Headers', 'Content-Type, Authorization')
             .addHeaderByKeyValue('Access-Control-Expose-Headers', 'link')
             .addHeaderByKeyValue('X-Frame-Options', 'LOL')
-            .addHeaderByKeyValue('X-Proxied-By', 'cors-container')
+            .addHeaderByKeyValue('X-Proxied-By', 'cors')
             .build(originResponse.headers);
         if(req.headers['rewrite-urls']){
             res.send(
@@ -77,7 +80,7 @@ const proxy = function(req, res, requestor) {
             .addHeaderByKeyValue('Access-Control-Allow-Headers', 'Content-Type, Authorization')
             .addHeaderByKeyValue('Access-Control-Expose-Headers', 'link')
             .addHeaderByKeyValue('X-Frame-Options', 'LOL')
-            .addHeaderByKeyValue('X-Proxied-By', 'cors-containermeh')
+            .addHeaderByKeyValue('X-Proxied-By', 'cors')
             .build(originResponse.response.headers);
 
         res.status(originResponse.response.statusCode || 500);
